@@ -149,7 +149,7 @@ int main() {
 
     result = sum(a, b);
 
-    printf("Sum: ");
+    printf("a+b=  ");
     display(result);
     printf("\n");
 
