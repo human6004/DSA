@@ -5,8 +5,53 @@
 typedef struct {
     char *digits; // Pointer to store digits
     int length;   // Length of the number
-    int isNegative; // cho biết số nguyên có âm hay ko
+    int isNegative; // kiểm tra dấu số nguyên
 } BigInteger;
+
+
+// Declare prototype functions
+void read(BigInteger *number, char x);
+
+void display(BigInteger num);
+
+BigInteger add(BigInteger a, BigInteger b);
+
+BigInteger subtract(BigInteger a, BigInteger b);
+
+BigInteger sum(BigInteger a, BigInteger b);
+
+BigInteger sub(BigInteger a, BigInteger b);
+
+void reverse(char *num, int length);
+
+int compareDigits(char *a, char *b, int lenA, int lenB);
+
+
+int main() {
+    BigInteger a, b, result;
+    read(&a, 'a');
+    read(&b, 'b');
+
+    result = sum(a, b);
+    printf("a + b = ");
+    display(result);
+    printf("\n");
+
+
+    free(result.digits);
+    result = sub(a, b);
+    printf("a - b = ");
+    display(result);
+    printf("\n");
+
+    // Giải phóng bộ nhớ
+    free(a.digits);
+    free(b.digits);
+    free(result.digits);
+
+    return 0;
+}
+
 
 void read(BigInteger *number, char x) {
     char c[1000];
@@ -30,13 +75,13 @@ void read(BigInteger *number, char x) {
 
 void display(BigInteger num) {
     if (num.isNegative) {
-        printf("-");//nếu độ dài của số lớn mà âm thì in ra '-'
+        printf("-");// nếu độ dài của số lớn mà âm thì in ra '-'
     }
     printf("%s", num.digits);
 }
 
 
-//lât ngược xâu
+// lât ngược xâu
 void reverse(char *num, int length) {
     int l = 0, r = length - 1;
     while (l < r) {
@@ -142,21 +187,45 @@ BigInteger sum(BigInteger a, BigInteger b) {
     return result;
 }
 
-int main() {
-    BigInteger a, b, result;
-    read(&a, 'a');
-    read(&b, 'b');
-
-    result = sum(a, b);
-
-    printf("a+b=  ");
-    display(result);
-    printf("\n");
-
-    // Giải phóng bộ nhớ
-    free(a.digits);
-    free(b.digits);
-    free(result.digits);
-
-    return 0;
+BigInteger sub(BigInteger a, BigInteger b){
+    BigInteger result;
+    if(a.isNegative == 0 && b.isNegative == 0){
+        // a,b dương
+        if(compareDigits(a.digits, b.digits, a.length, b.length) >= 0){
+            result = subtract(a,b);
+            result.isNegative = 0;
+        }
+        else{
+            result = subtract(b,a);
+            result.isNegative = 1;
+        }
+        
+    }
+    else if(a.isNegative != b.isNegative){
+        // a,b khác dấu
+        if(a.isNegative == 1 && b.isNegative == 0){
+            // a âm, b dương
+            a.isNegative = 0; // Đổi dấu a thành dương để thực hiện phép cộng
+            result = sum(a,b);
+            result.isNegative = 1;
+        }
+        else if(a.isNegative == 0 && b.isNegative == 1){
+            // a dương, b âm
+            b.isNegative = 0; // Đổi dấu b thành dương để thực hiện phép cộng
+            result = sum(a,b);
+            result.isNegative = 0;
+        }
+    }
+    else{
+        // a,b âm
+        if(compareDigits(a.digits, b.digits, a.length, b.length) >= 0){
+            result = subtract(a,b);
+            result.isNegative = 1;
+        }
+        else{
+            result = subtract(b,a);
+            result.isNegative = 0;
+        }
+    }
+    return result;
 }
