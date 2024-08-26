@@ -110,6 +110,10 @@ BigInteger subtract(BigInteger a, BigInteger b) {
     reverse(b.digits, b.length);
 
     int borrow = 0;
+    // for(int i = 0; i < maxLength; i++){
+    //     int digitA = (i < a.length) ? a.digits[i] - '0' : 0;
+    //     int digitB = (i < b.length) ? b.digits[i] - '0' : 0;
+    // }
     for (int i = 0; i < maxLength; i++) {
         int digitA = (i < a.length) ? a.digits[i] - '0' : 0;
         int digitB = (i < b.length) ? b.digits[i] - '0' : 0;
@@ -192,14 +196,10 @@ BigInteger sub(BigInteger a, BigInteger b){
     if(a.isNegative == 0 && b.isNegative == 0){
         // a,b dương
         if(compareDigits(a.digits, b.digits, a.length, b.length) >= 0){
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             result = subtract(a,b);
             result.isNegative = 0;
         }
         else{
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             result = subtract(b,a);
             result.isNegative = 1;
         }
@@ -209,16 +209,12 @@ BigInteger sub(BigInteger a, BigInteger b){
         // a,b khác dấu
         if(a.isNegative == 1 && b.isNegative == 0){
             // a âm, b dương
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             a.isNegative = 0; // Đổi dấu a thành dương để thực hiện phép cộng
             result = sum(a,b);
             result.isNegative = 1;
         }
         else if(a.isNegative == 0 && b.isNegative == 1){
             // a dương, b âm
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             b.isNegative = 0; // Đổi dấu b thành dương để thực hiện phép cộng
             result = sum(a,b);
             result.isNegative = 0;
@@ -226,17 +222,11 @@ BigInteger sub(BigInteger a, BigInteger b){
     }
     else{
         // a,b âm
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
         if(compareDigits(a.digits, b.digits, a.length, b.length) >= 0){
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             result = subtract(a,b);
             result.isNegative = 1;
         }
         else{
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             result = subtract(b,a);
             result.isNegative = 0;
         }
