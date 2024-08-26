@@ -28,7 +28,16 @@ int compareDigits(char *a, char *b, int lenA, int lenB);
 
 
 int main() {
-    BigInteger a, b, result;
+while(1){
+	printf("___________________________________________\n");
+    printf("1. Enter 2 integers: \n");
+	printf("0. Exit!!!\n");
+	printf("___________________________________________\n");
+	printf("Enter selection: ");
+	int lc; scanf("%d", &lc);
+    getchar();
+    if(lc==1){
+	BigInteger a, b, result;
     read(&a, 'a');
     read(&b, 'b');
 
@@ -43,15 +52,17 @@ int main() {
     printf("a - b = ");
     display(result);
     printf("\n");
-
     // Giải phóng bộ nhớ
     free(a.digits);
     free(b.digits);
     free(result.digits);
+	}
+	else if(lc ==0){
+			break;
+	}
 
-    return 0;
 }
-
+}
 
 void read(BigInteger *number, char x) {
     char c[1000];
@@ -79,7 +90,6 @@ void display(BigInteger num) {
     }
     printf("%s", num.digits);
 }
-
 
 // lât ngược xâu
 void reverse(char *num, int length) {
@@ -183,7 +193,6 @@ BigInteger sum(BigInteger a, BigInteger b) {
             result.isNegative = b.isNegative; // Kết quả có dấu của số lớn hơn
         }
     }
-
     return result;
 }
 
