@@ -29,11 +29,11 @@ int compareDigits(char *a, char *b, int lenA, int lenB);
 
 int main() {
 while(1){
-	printf("___________________________________________\n");
+	printf("___________________________________________\n\n");
     printf("1. Enter 2 integers: \n");
 	printf("0. Exit!!!\n");
-	printf("___________________________________________\n");
-	printf("Enter selection: ");
+	printf("\n___________________________________________\n");
+	printf("Enter selection: "); 
 	int lc; scanf("%d", &lc);
     getchar();
     if(lc==1){
@@ -60,6 +60,9 @@ while(1){
 	else if(lc ==0){
 			break;
 	}
+    else{
+    printf("Incorrect!!!\nPlease enter again.\n");
+    }
 
 }
 }
@@ -198,17 +201,15 @@ BigInteger sum(BigInteger a, BigInteger b) {
 
 BigInteger sub(BigInteger a, BigInteger b){
     BigInteger result;
+        reverse(a.digits, a.length);
+        reverse(b.digits, b.length);
     if(a.isNegative == 0 && b.isNegative == 0){
         // a,b dương
         if(compareDigits(a.digits, b.digits, a.length, b.length) >= 0){
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             result = subtract(a,b);
             result.isNegative = 0;
         }
         else{
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             result = subtract(b,a);
             result.isNegative = 1;
         }
@@ -218,16 +219,12 @@ BigInteger sub(BigInteger a, BigInteger b){
         // a,b khác dấu
         if(a.isNegative == 1 && b.isNegative == 0){
             // a âm, b dương
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             a.isNegative = 0; // Đổi dấu a thành dương để thực hiện phép cộng
             result = sum(a,b);
             result.isNegative = 1;
         }
         else if(a.isNegative == 0 && b.isNegative == 1){
             // a dương, b âm
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             b.isNegative = 0; // Đổi dấu b thành dương để thực hiện phép cộng
             result = sum(a,b);
             result.isNegative = 0;
@@ -235,20 +232,16 @@ BigInteger sub(BigInteger a, BigInteger b){
     }
     else{
         // a,b âm
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
         if(compareDigits(a.digits, b.digits, a.length, b.length) >= 0){
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             result = subtract(a,b);
             result.isNegative = 1;
         }
         else{
-            reverse(a.digits, a.length);
-            reverse(b.digits, b.length);
             result = subtract(b,a);
             result.isNegative = 0;
         }
     }
+    reverse(a.digits, a.length);
+    reverse(b.digits, b.length);
     return result;
 }
