@@ -141,6 +141,8 @@ Position locate(ElementType x, List L)
         else
             P = next(P, L);
     return P;
+    // int p = first(L)
+
 }
 
 void printList(List L)
