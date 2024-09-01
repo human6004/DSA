@@ -7,7 +7,7 @@
 typedef int ElementType;
 // the position type of elements
 typedef int Position;
-typedef struct
+typedef struct List
 {
     // array consisting elements of list
     ElementType Elements[MaxLength];
