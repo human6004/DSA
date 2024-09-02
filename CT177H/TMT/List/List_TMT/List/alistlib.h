@@ -97,7 +97,8 @@ void InsertAt(ElementType X, Position P, List *L)
         Position Q;
         /*Dời các phtử từ vị trí p đến cuối dsách ra
         sau 1 vị trí*/
-        for (Q = (L->Last - 1) + 1; Q >= P; Q--){
+        for (Q = (L->Last - 1) + 1; Q >= P; Q--)
+        {
             L->Elements[Q] = L->Elements[Q - 1];
             // Đưa x vào vị trí p
         }
@@ -119,9 +120,63 @@ void popAt(Position P, List *L)
         Position Q;
         /*Dời các phtử từ vị trí p+1 đến cuối
          danh sách ra trước 1 vị trí*/
-        for (Q = P - 1; Q < L->Last - 1; Q++){
+        for (Q = P - 1; Q < L->Last - 1; Q++)
+        {
             L->Elements[Q] = L->Elements[Q + 1];
-        }     
+        }
         L->Last--;
     }
+}
+
+// Insert x to the first position
+void insertFirst(ElementType x, List *L)
+{
+    Position Q;
+    for (Q = L->Last; Q >= first(*L); Q--)
+    {
+        L->Elements[Q] = L->Elements[Q - 1];
+    }
+    L->Elements[first(*L)] = x;
+    L->Last++;
+}
+
+// Remove and return the first element
+void popFirst(List *L)
+{
+    popAt(first(*L), L);
+}
+
+// Append a new element to the list
+void append(ElementType x, List *L)
+{
+    L->Last++;
+    L->Elements[L->Last] = x;
+}
+
+// Remove and return the last element
+void popLast(List *L)
+{
+    popAt(end(*L), L);
+}
+
+// Return the position of the first appearance of x in the list
+Position Locate(ElementType X, List L)
+{
+    Position P;
+    int Found = 0;
+    P = first(L); // vị trí phần tử đầu tiên
+    /*trong khi chưa tìm thấy và chưa kết thúc
+    danh sách thì xét phần tử kế tiếp*/
+    while ((P != end(L)) && (Found == 0))
+        if (getAt(P, L) == X)
+            Found = 1;
+        else
+            P = next(P, L);
+    return P;
+}
+
+//Return the previous position of p in L
+Position previous(Position p,List L){
+	return p-1;
+
 }
