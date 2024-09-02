@@ -172,8 +172,38 @@ Position Locate(ElementType X, List L)
     return P;
 }
 
-//Return the previous position of p in L
-Position previous(Position p,List L){
-	return p-1;
+// Return the previous position of p in L
+Position previous(Position p, List L)
+{
+    return p - 1;
+}
+void swap(ElementType *x, ElementType *y)
+{
+    ElementType tmp = *x;
+    *x = *y;
+    *y = tmp;
+}
 
+void sort(List *L)
+{
+    Position p, q;
+    p = first(*L); // vị trí phần tử đầu tiên trong danh sách
+
+    // Vòng lặp để duyệt từng phần tử trong danh sách
+    while (p != end(*L))
+    {
+        q = next(p, *L); // vị trí phần tử đứng ngay sau phần tử p
+
+        // Vòng lặp để duyệt và so sánh các phần tử sau p
+        while (q != end(*L))
+        {
+            // Nếu phần tử tại p lớn hơn phần tử tại q, thì hoán đổi
+            if (getAt(p, *L) > getAt(q, *L))
+            {
+                swap(&L->Elements[p - 1], &L->Elements[q - 1]); // hoán đổi nội dung 2 phần tử
+            }
+            q = next(q, *L);
+        }
+        p = next(p, *L);
+    }
 }
