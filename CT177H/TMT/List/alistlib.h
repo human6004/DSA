@@ -111,15 +111,13 @@ void InsertAt(ElementType X, Position P, List *L)
 // Remove and return the element at position p
 void popAt(Position P, List *L)
 {
-    if ((P < 1) || (P > L->Last))
-        printf("Vi tri khong hop le");
-    else if (empty(*L))
-        printf("Danh sach rong!");
+    if (empty(*L))
+        printf("Danh sách rỗng!\n");
+    else if ((P < 1) || (P > L->Last))
+        printf("Vị trí không hợp lệ!\n");
     else
     {
         Position Q;
-        /*Dời các phtử từ vị trí p+1 đến cuối
-         danh sách ra trước 1 vị trí*/
         for (Q = P - 1; Q < L->Last - 1; Q++)
         {
             L->Elements[Q] = L->Elements[Q + 1];
@@ -131,13 +129,7 @@ void popAt(Position P, List *L)
 // Insert x to the first position
 void insertFirst(ElementType x, List *L)
 {
-    Position Q;
-    for (Q = L->Last; Q >= first(*L); Q--)
-    {
-        L->Elements[Q] = L->Elements[Q - 1];
-    }
-    L->Elements[first(*L)] = x;
-    L->Last++;
+    InsertAt(x, first(*L), L); // Chèn phần tử x vào vị trí đầu tiên
 }
 
 // Remove and return the first element
@@ -149,14 +141,19 @@ void popFirst(List *L)
 // Append a new element to the list
 void append(ElementType x, List *L)
 {
-    L->Last++;
-    L->Elements[L->Last] = x;
+    if (fullList(*L)) // Kiểm tra danh sách có đầy không
+        printf("Danh sách đầy!\n");
+    else
+    {
+        L->Elements[L->Last] = x;
+        L->Last++;
+    }
 }
 
 // Remove and return the last element
 void popLast(List *L)
 {
-    popAt(end(*L), L);
+    popAt(L->Last, L); // Xóa phần tử cuối cùng
 }
 
 // Return the position of the first appearance of x in the list
