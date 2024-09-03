@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 typedef struct {
     char *digits; // Pointer to store digits
     int length;   // Length of the number
