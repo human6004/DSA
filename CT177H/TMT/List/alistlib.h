@@ -16,6 +16,45 @@ typedef struct
 
 List L;
 
+void makeNull(List *L);// KHỞI TẠO DANH SÁCH RỖNG
+
+int Len(List L);// trả về đồ dài ds
+
+int empty(List L);// KIỂM TRA DANH SÁCH RỖNG
+
+int fullList(List L);// KIỂM TRA DANH SÁCH ĐẦY
+
+int first(List L);// trả về vị trí đầu tiên trong danh sách
+
+int end(List L);// trả về vị trí cuối danh sách
+
+int next(Position P, List L);// trả về vị trí kế tiếp
+
+int getAt(Position P, List L);// Trả về phần tử ở vị trí p
+
+void print(List L);// Duyệt qua danh sách để in ra tất cả các phần tử
+
+void setAt(Position P, ElementType x, List *L);// Thay đổi phần tử ở vị trí p bằng một giá trị mới x
+
+void InsertAt( Position P,ElementType X, List *L);// Thêm x vào vị trí p
+
+int popAt(Position P, List *L);// Xóa và trả về phần tử ở vị trí p
+
+int insertFirst(ElementType x, List *L);//Thêm x vào vị trí đầu tiên
+
+void popFirst(List *L);//Xóa và trả về phần tử đầu tiên
+
+void append(ElementType x, List *L);//Thêm một phần tử mới vào cuối ds
+
+void popLast(List *L);//Xóa và trả về phần tử cuối cùng
+
+Position previous(Position p, List L);//Trả về vị trí trước đó của p trong danh sách
+
+void swap(ElementType *x, ElementType *y);//thay đổi vị trí trong mảng
+
+void sort(List *L);
+
+
 // KHỞI TẠO DANH SÁCH RỖNG
 void makeNull(List *L)
 {
