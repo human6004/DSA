@@ -10,10 +10,13 @@ typedef struct node
 
 void duyet(node *head);
 int size(node *head);
-node *makeNode(int n);
-void pushFront(node **head, int x);
-void pushBack(node **head, int x);
+node *makeNode(int n);                  // tạo 1 node mới
+void pushFront(node **head, int x);     // them node vao dau
+void pushBack(node **head, int x);      // them node vao cuoi
 void insert(node **head, int k, int x); // chen vao vi tri k trong DSLK
+void deleFront(node **head);            // xóa phần tử ở vị trí đầu
+void deleBack(node **head);             // xóa phần tử ở vị trí cuối
+
 
 int main()
 {
@@ -24,7 +27,10 @@ int main()
         printf("1. them phan tu vao cuoi \n");
         printf("2. them phan tu vao dau\n");
         printf("3.chen phan tu vao giua\n");
-        printf("4. duyet DSLK\n");
+        printf("4. xoa dau\n");
+        printf("5. xoa giua\n");
+        printf("6. xoa cuoi\n");
+        printf("7. duyet DSLK\n");
         printf("0. exit!!!\n");
         printf("\n___________________________________________\n");
         printf("Enter selection: \n");
@@ -55,6 +61,16 @@ int main()
             insert(&head, k, x);
         }
         else if (lc == 4)
+        {
+            deleFront(&head);
+        }
+
+
+        else if(lc == 6){
+            deleBack(&head);
+        }
+
+        else if (lc == 7)
         {
             duyet(head);
         }
@@ -106,12 +122,12 @@ void pushFront(node **head, int x)
 void pushBack(node **head, int x)
 {
     node *newNode = makeNode(x);
-    if (*head == NULL)
+    node *tmp = *head;
+    if (tmp == NULL)
     {
         *head = newNode;
         return;
     }
-    node *tmp = *head;
     while (tmp->next != NULL)
     {
         tmp = tmp->next;
@@ -150,4 +166,33 @@ void insert(node **head, int k, int x)
         // bước 2: phần next cua node thứ K-1 lưu vào địa chỉ của node mới
         temp->next = newNode; // temp bây giờ sẽ lưu địa chỉ của nodeNew
     }
+}
+
+void deleFront(node **head)
+{
+    if (*head == NULL)
+        return;
+    node *temp = *head;    // dia chi dau tien trong DSLK
+    *head = (*head)->next; // head truy cap vao node thu 2 cua DSLK
+    free(temp);            // giai phong bo nho cua phan tu dau tien
+};
+
+void deleBack(node **head){
+    if(*head == NULL){
+       return; 
+    } 
+    node *temp = (*head);
+    if(temp->next == NULL)//neu trong DSLK co 1 phan tu --> xoa phan tu do
+    {
+        *head = NULL;
+        free(temp);
+        return;
+    }
+    while (temp->next->next != NULL)//truy cập đến địa chỉ kế bên địa chỉ cuối cùng
+    {
+        temp = temp->next;// đến địa chỉ kế bên địa chỉ cuối cùng -> vòng lặp kết thúc
+    }
+    node *last = temp->next;//truy cập đến địa chỉ cuối cùng
+    temp->next =NULL;//cho next của địa chỉ cuối cùng mới của DSLK = null khi mà xóa địa cuối cũ
+    free(last);//giải phóng bộ nhớ của địa chỉ cuối cũ
 }
