@@ -16,7 +16,7 @@ void pushBack(node **head, int x);      // them node vao cuoi
 void insert(node **head, int k, int x); // chen vao vi tri k trong DSLK
 void deleFront(node **head);            // xóa phần tử ở vị trí đầu
 void deleBack(node **head);             // xóa phần tử ở vị trí cuối
-
+void erase(node **head, int k);                // xía vị trí thứ k
 
 int main()
 {
@@ -65,6 +65,12 @@ int main()
             deleFront(&head);
         }
 
+        else if(lc == 5){
+            printf("nhap vi tri can xoa: ");
+            int k;
+            scanf("%d", &k);
+            erase(&head,k);
+        }
 
         else if(lc == 6){
             deleBack(&head);
@@ -196,3 +202,22 @@ void deleBack(node **head){
     temp->next =NULL;//cho next của địa chỉ cuối cùng mới của DSLK = null khi mà xóa địa cuối cũ
     free(last);//giải phóng bộ nhớ của địa chỉ cuối cũ
 }
+
+void erase(node **head,int k){
+    if(k<1 || k>size(*head)){
+        return;
+    }
+    if(k == 1){
+        deleFront(head);
+    }
+    else{
+        node *temp= (*head);
+        for(int i=1; i<k-1; i++){
+            temp= temp->next;
+        }// vị trí k-1
+        node* del = temp->next;// vị trí thứ k
+        temp->next = del->next;// địa chỉ k-1 lưu địa chỉ k -> vị trí k bị bỏ
+        free(del);
+    }
+}
+
