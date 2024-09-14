@@ -24,13 +24,13 @@ int empty(List L);// KIỂM TRA DANH SÁCH RỖNG
 
 int fullList(List L);// KIỂM TRA DANH SÁCH ĐẦY
 
-int first(List L);// trả về vị trí đầu tiên trong danh sách
+Position first(List L);// trả về vị trí đầu tiên trong danh sách
 
-int end(List L);// trả về vị trí cuối danh sách
+Position end(List L); // trả về vị trí cuối danh sách
 
-int next(Position P, List L);// trả về vị trí kế tiếp
+Position next(Position P, List L);// trả về vị trí kế tiếp
 
-int getAt(Position P, List L);// Trả về phần tử ở vị trí p
+ElementType getAt(Position P, List L);// Trả về phần tử ở vị trí p
 
 void print(List L);// Duyệt qua danh sách để in ra tất cả các phần tử
 
@@ -38,15 +38,17 @@ void setAt(Position P, ElementType x, List *L);// Thay đổi phần tử ở v�
 
 void InsertAt( Position P,ElementType X, List *L);// Thêm x vào vị trí p
 
-int popAt(Position P, List *L);// Xóa và trả về phần tử ở vị trí p
+ElementType popAt(Position P, List *L);// Xóa và trả về phần tử ở vị trí p
 
 int insertFirst(ElementType x, List *L);//Thêm x vào vị trí đầu tiên
 
 void popFirst(List *L);//Xóa và trả về phần tử đầu tiên
 
-void append(ElementType x, List *L);//Thêm một phần tử mới vào cuối ds
+void append(ElementType x, List *L); // Thêm một phần tử mới vào cuối ds
 
 void popLast(List *L);//Xóa và trả về phần tử cuối cùng
+
+Position locate(ElementType x, List L);// Trả về vị trí xuất hiện đầu tiên của x trong danh sách
 
 Position previous(Position p, List L);//Trả về vị trí trước đó của p trong danh sách
 
@@ -113,7 +115,8 @@ void print(List L)
     if(fullList(L)){
         printf ("List is full!!!");
     }
-    for (int i = first(L); i < end(L); i++){
+    for (int i = first(L); i < end(L); i++)
+    {
         printf ("%d ", L.Elements[i-1]);
     }
 }
@@ -213,6 +216,15 @@ Position Locate(ElementType X, List L)
             return i;
         }
     }
+}
+
+Position locate(ElementType x, List L){
+	Position p;
+	int found=0;
+    for (p = first(L); p < end(L) && !found; p++)
+        if (L.Elements[p - 1] == x)
+            found = 1;
+    return p;
 }
 
 //Trả về vị trí trước đó của p trong danh sách

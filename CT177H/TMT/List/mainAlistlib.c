@@ -1,17 +1,13 @@
 #include "alistlib.h"
 
-
 void menu(List *L);
-
-
 
 int main() {
     List L;
     makeNull(&L); // Khoi tao danh sach rong
-    menu(&L); // Goi ham menu
+    menu(&L);     // Goi ham menu
     return 0;
 }
-
 
 void menu(List *L) {
     int choice, position, element;
@@ -36,6 +32,7 @@ void menu(List *L) {
         printf("16. Tra ve vi tri truoc do (previous)\n");
         printf("17. In danh sach (print)\n");
         printf("18. Sap xep danh sach (sort)\n");
+        printf("19. Tra ve vi tri xuat hien dau tien cua phan tu x trong danh sach\n");
         printf("0.  Thoat\n");
         printf("_____________________________________________\n");
 
@@ -71,14 +68,23 @@ void menu(List *L) {
             case 4:
                 printf("Nhap vi tri can chen: ");
                 scanf("%d", &position);
+                if (position < 1 || position > end(*L)) {
+                    printf("Vi tri khong hop le.\n");
+                    break;
+                }
                 printf("Nhap gia tri can chen: ");
                 scanf("%d", &element);
                 InsertAt(position, element, L);
+                printf("Phan tu %d da duoc chen vao vi tri %d.\n", element, position);
                 break;
 
             case 5:
                 printf("Nhap vi tri can xoa: ");
                 scanf("%d", &position);
+                if (position < 1 || position >= end(*L)) {
+                    printf("Vi tri khong hop le.\n");
+                    break;
+                }
                 printf("Phan tu da xoa: %d\n", popAt(position, L));
                 break;
 
@@ -113,32 +119,49 @@ void menu(List *L) {
                 break;
 
             case 12:
-                printf("Vi tri cuoi trong danh sach la: %d\n", end(*L));
+                printf("Vi tri cuoi trong danh sach la: %d\n", end(*L) - 1);
                 break;
 
             case 13:
                 printf("Nhap vi tri hien tai: ");
                 scanf("%d", &position);
+                if (position < 1 || position >= end(*L)) {
+                    printf("Vi tri khong hop le.\n");
+                    break;
+                }
                 printf("Vi tri ke tiep la: %d\n", next(position, *L));
                 break;
 
             case 14:
                 printf("Nhap vi tri can lay phan tu: ");
                 scanf("%d", &position);
+                if (position < 1 || position >= end(*L)) {
+                    printf("Vi tri khong hop le.\n");
+                    break;
+                }
                 printf("Phan tu tai vi tri %d la: %d\n", position, getAt(position, *L));
                 break;
 
             case 15:
                 printf("Nhap vi tri can thay doi: ");
                 scanf("%d", &position);
+                if (position < 1 || position >= end(*L)) {
+                    printf("Vi tri khong hop le.\n");
+                    break;
+                }
                 printf("Nhap gia tri moi: ");
                 scanf("%d", &element);
                 setAt(position, element, L);
+                printf("Da thay doi phan tu tai vi tri %d thanh %d.\n", position, element);
                 break;
 
             case 16:
                 printf("Nhap vi tri hien tai: ");
                 scanf("%d", &position);
+                if (position < 2 || position > end(*L)) {
+                    printf("Vi tri khong hop le.\n");
+                    break;
+                }
                 printf("Vi tri truoc do la: %d\n", previous(position, *L));
                 break;
 
@@ -149,6 +172,17 @@ void menu(List *L) {
             case 18:
                 sort(L);
                 printf("Danh sach da duoc sap xep.\n");
+                break;
+
+            case 19:
+                printf("Nhap phan tu can tim: ");
+                scanf("%d", &element);
+                position = locate(element, *L);
+                if (position == end(*L)) {
+                    printf("Khong tim thay phan tu %d trong danh sach.\n", element);
+                } else {
+                    printf("Phan tu %d xuat hien dau tien tai vi tri %d.\n", element, position);
+                }
                 break;
 
             default:
