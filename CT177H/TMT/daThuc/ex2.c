@@ -26,8 +26,8 @@ int main()
     print(sum);
 
     // Tính đạo hàm của đa thức 1
-    derivativePoly = derivative(x);
-    printf("\nDao ham cua da thuc 1: ");
+    derivativePoly = derivative(sum);
+    printf("\nDao ham cua da thuc cua moi: ");
     print(derivativePoly);
 
     return 0;
