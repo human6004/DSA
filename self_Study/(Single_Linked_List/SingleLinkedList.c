@@ -123,7 +123,7 @@ void pushFront(node **head, int x)
 { // **node: truy cập vào địa chỉ của nút node trong DSLK
     node *newNode = makeNode(x);
     newNode->next = (*head); //* head: giải tham chiếu lấy địa chỉ của node hiện tại gán cho next của node mới
-    (*head) = newNode;
+    (*head) = newNode;//
 }
 void pushBack(node **head, int x)
 {

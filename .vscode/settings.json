@@ -2,7 +2,12 @@
     "files.associations": {
         "stdio.h": "c",
         "stdlib.h": "c",
-        "alistlib.h": "c"
+        "alistlib.h": "c",
+        "compare": "cpp",
+        "*.tcc": "cpp",
+        "cmath": "cpp",
+        "type_traits": "cpp",
+        "typeinfo": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
