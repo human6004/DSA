@@ -119,6 +119,7 @@ void setAt(ElementType x, int posi, List *L){
     PNode p = getPosition(posi, *L);
     if (p != NULL){
         p->data = x;
+        
     }
 }
 
@@ -205,7 +206,7 @@ void append(int x, List *L){
     newNode->data = x;
     newNode->next = NULL;
     List temp = *L;
-    while(temp->next != NULL){
+    while(temp != NULL){
         temp = temp->next;
     }
         temp->next = newNode;
