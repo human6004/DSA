@@ -14,49 +14,43 @@ typedef struct NodeTag
 typedef Node *List;
 typedef Node *PNode;
 
-// void makeNull(List *L); // KHỞI TẠO DANH SÁCH RỖNG
+void makeNull(List *L); // KHỞI TẠO DANH SÁCH RỖNG
 
-// int len(List L); // trả về đồ dài ds
+int len(List L); // trả về đồ dài ds
 
-// int empty(List L); // KIỂM TRA DANH SÁCH RỖNG
+int empty(List L); // KIỂM TRA DANH SÁCH RỖNG
 
-// int fullList(List L); // KIỂM TRA DANH SÁCH ĐẦY
+int fullList(List L); // KIỂM TRA DANH SÁCH ĐẦY
 
-// Position first(List L); // trả về vị trí đầu tiên trong danh sách
+ElementType getAt(Position P, List L); // Trả về phần tử ở vị trí p
 
-// Position end(List L); // trả về vị trí cuối danh sách
+void print(List L); // Duyệt qua danh sách để in ra tất cả các phần tử
 
-// Position next(Position P, List L); // trả về vị trí kế tiếp
+PNode getPosition(Position p, List L); // Trả về con trỏ trỏ đến phần tử thứ i
 
-// ElementType getAt(Position P, List L); // Trả về phần tử ở vị trí p
+PNode first(List L); // trả về vị trí đầu tiên trong danh sách
 
-// void print(List L); // Duyệt qua danh sách để in ra tất cả các phần tử
+PNode end(List L); // trả về vị trí cuối danh sách
 
-// PNode getPosition(Position p, List L); // Trả về con trỏ trỏ đến phần tử thứ i
+void setAt(Position p, ElementType x, List *L); // Cập nhật phần tử ở vị trí p bằng một giá trị mới
 
-// PNode first(List L); // trả về vị trí đầu tiên trong danh sách
+void insertAt(Position p, ElementType x, List *L); // Thêm vào vị trí bất kỳ
 
-// PNode end(List L); // trả về vị trí cuối danh sách
+ElementType popAt(Position p, List *L); // Xóa và trả về phần tử ở vị trí p
 
-// void setAt(Position p, ElementType x, List *L); // Cập nhật phần tử ở vị trí p bằng một giá trị mới
+void insertFirst(ElementType x, List *L); // Chèn x vào vị trí đầu tiên
 
-// void insertAt(Position p, ElementType x, List *L); // Thêm vào vị trí bất kỳ
+ElementType popFirst(List *L); // Xóa và trả về phần tử đầu tiên
 
-// ElementType popAt(Position p, List *L); // Xóa và trả về phần tử ở vị trí p
+void append(ElementType x, List *L); // Thêm một phần tử mới vào danh sách
 
-// void insertFirst(ElementType x, List *L); // Chèn x vào vị trí đầu tiên
+ElementType popLast(List *L); // Xóa và trả về phần tử cuối cùng
 
-// ElementType popFirst(List *L); // Xóa và trả về phần tử đầu tiên
+Position locate(ElementType x, List L); // Trả về vị trí xuất hiện đầu tiên của x trong danh sách
 
-// void append(ElementType x, List *L); // Thêm một phần tử mới vào danh sách
+PNode next(Position p, List L); // Trả về vị trí xuất hiện đầu tiên của x trong danh sách
 
-// ElementType popLast(List *L); // Xóa và trả về phần tử cuối cùng
-
-// Position locate(ElementType x, List L); // Trả về vị trí xuất hiện đầu tiên của x trong danh sách
-
-// PNode next(Position p, List L); // Trả về vị trí xuất hiện đầu tiên của x trong danh sách
-
-// PNode previous(Position p, List L); // Trả về con trỏ trỏ đến vị trí trước đó của p trong L
+PNode previous(Position p, List L); // Trả về con trỏ trỏ đến vị trí trước đó của p trong L
 
 /*
 Initialize an empty list
@@ -268,7 +262,6 @@ ElementType popFirst(List *L)
   return data;
 }
 
-
 /*
 Append a new element to the list
 */
@@ -290,7 +283,7 @@ ElementType popLast(List *L)
     posLast = posLast->next;
   }
   value = posLast->next->data;
-  popAt(len(*L) , L);
+  popAt(len(*L), L);
 }
 
 /*

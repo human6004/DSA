@@ -239,48 +239,35 @@ void swap(ElementType *x, ElementType *y)
     *y = tmp;
 }
 
-void sort(List *L)
-{
-    Position p, q;
-    p = first(*L); // vị trí phần tử đầu tiên trong danh sách
 
-    // Vòng lặp để duyệt từng phần tử trong danh sách
-    while (p != end(*L))
-    {
-        q = next(p, *L); // vị trí phần tử đứng ngay sau phần tử p
+// selection sort
 
-        // Vòng lặp để duyệt và so sánh các phần tử sau p
-        while (q != end(*L))
-        {
-            // Nếu phần tử tại p lớn hơn phần tử tại q, thì hoán đổi
-            if (getAt(p, *L) > getAt(q, *L))
-            {
-                swap(&L->Elements[p - 1], &L->Elements[q - 1]); // hoán đổi nội dung 2 phần tử
+// void sort(List *L) {
+//     for (Position p = first(*L); p < end(*L) - 1; p = next(p, *L)) {
+//         for (Position q = next(p, *L); q < end(*L); q = next(q, *L)) {
+//             if (getAt(p, *L) > getAt(q, *L)) {
+//                 ElementType temp = L->Elements[p - 1];
+//                 L->Elements[p - 1] = L->Elements[q - 1];
+//                 L->Elements[q - 1] = temp;
+//             }
+//         }
+//     }
+// }
+
+// bubbleSort
+void sort(List *L) {
+    Position i, j;
+    int n = end(*L);  // end(*L) trả về số phần tử trong danh sách
+
+    for (i = 0; i < n - 1; i++) {
+        // Vòng lặp thứ hai chạy từ đầu đến phần tử chưa được sắp xếp cuối cùng
+        for (j = 0; j < n - i - 1; j++) {
+            // So sánh hai phần tử liên tiếp và hoán đổi nếu thứ tự sai
+            if (L->Elements[j] > L->Elements[j + 1]) {
+                ElementType temp = L->Elements[j];
+                L->Elements[j] = L->Elements[j + 1];
+                L->Elements[j + 1] = temp;
             }
-            q = next(q, *L);
         }
-        p = next(p, *L);
     }
 }
-
-// int main (){
-//     List L;
-//     makeNull(&L);
-
-//     int n;
-//     printf ("Nhap vao so luong phan tu cua ds: ");
-//     scanf ("%d", &n);
-
-//     printf ("Nhap cac phan tu: ");
-//     for (int i = 1; i <=n ;i++){
-//         int x; scanf("%d", &x);
-//         InsertAt(i, x, &L);
-//     }
-
-//     print(L);
-//     printf ("\n");
-//     sort(&L);
-//     print(L);
-//     return 0;
-
-// }

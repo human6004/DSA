@@ -1,6 +1,10 @@
 #include "alistlib.h"
 #include <stdio.h>
 
+
+
+
+
 int main() {
     List L;
     makeNull(&L); // Khởi tạo danh sách rỗng
