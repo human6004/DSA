@@ -129,7 +129,7 @@ int main() {
 
 
     // Nhập chuỗi và khóa
-    getchar();  // Đọc ký tự xuống dòng sau lệnh scanf trước đó
+    // getchar();  // Đọc ký tự xuống dòng sau lệnh scanf trước đó
     inputString(&source);
     inputKey(&key);
 
