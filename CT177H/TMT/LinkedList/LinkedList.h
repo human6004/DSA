@@ -42,7 +42,7 @@ void insertFirst(ElementType x, List *L); // Chèn x vào vị trí đầu tiên
 
 ElementType popFirst(List *L); // Xóa và trả về phần tử đầu tiên
 
-void append(ElementType x, List *L); // Thêm một phần tử mới vào danh sách
+void  (ElementType x, List *L); // Thêm một phần tử mới vào danh sách
 
 ElementType popLast(List *L); // Xóa và trả về phần tử cuối cùng
 

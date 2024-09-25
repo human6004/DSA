@@ -1,7 +1,7 @@
 #include"LinkedList"
 #include<stdio.h>
 
-
+//linkedlist
 void bubbleSort(List *L) {
     if (*L == NULL || (*L)->next == NULL) {
         return; // Danh sách rỗng hoặc chỉ có một phần tử, không cần sắp xếp

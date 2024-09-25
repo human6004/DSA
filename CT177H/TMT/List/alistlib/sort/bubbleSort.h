@@ -1,7 +1,7 @@
 #include "alistlib.h"
 #include <stdio.h>
 
-
+//list
 // bubbleSort
 void bubbleSort(List *L) {
     Position i, j;

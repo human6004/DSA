@@ -8,7 +8,15 @@
         "cmath": "cpp",
         "type_traits": "cpp",
         "typeinfo": "cpp",
-        "linkedlist.h": "c"
+        "linkedlist.h": "c",
+        "array": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
