@@ -1,4 +1,5 @@
 #include "alistlib.h"
+// #include "baiNop.h"
 #include <stdio.h>
 
 
@@ -28,7 +29,7 @@ int main() {
     print(L);
 
     // Sắp xếp danh sách theo thứ tự tăng dần
-    sort(&L);
+    bubbleSort(&L);
 
     // In danh sách sau khi sắp xếp
     printf("\nDanh sach sau khi sap xep: ");

@@ -10,52 +10,51 @@ typedef int Position;
 
 typedef struct
 {
-    ElementType Elements[MaxLength];// mảng bao gồm các phần tử của danh sách
-    Position Last;// độ dài của danh sách
+    ElementType Elements[MaxLength]; // mảng bao gồm các phần tử của danh sách
+    Position Last;                   // độ dài của danh sách
 } List;
 
 List L;
 
-void makeNull(List *L);// KHỞI TẠO DANH SÁCH RỖNG
+void makeNull(List *L); // KHỞI TẠO DANH SÁCH RỖNG
 
-int Len(List L);// trả về đồ dài ds
+int Len(List L); // trả về đồ dài ds
 
-int empty(List L);// KIỂM TRA DANH SÁCH RỖNG
+int empty(List L); // KIỂM TRA DANH SÁCH RỖNG
 
-int fullList(List L);// KIỂM TRA DANH SÁCH ĐẦY
+int fullList(List L); // KIỂM TRA DANH SÁCH ĐẦY
 
-Position first(List L);// trả về vị trí đầu tiên trong danh sách
+Position first(List L); // trả về vị trí đầu tiên trong danh sách
 
 Position end(List L); // trả về vị trí cuối danh sách
 
-Position next(Position P, List L);// trả về vị trí kế tiếp
+Position next(Position P, List L); // trả về vị trí kế tiếp
 
-ElementType getAt(Position P, List L);// Trả về phần tử ở vị trí p
+ElementType getAt(Position P, List L); // Trả về phần tử ở vị trí p
 
-void print(List L);// Duyệt qua danh sách để in ra tất cả các phần tử
+void print(List L); // Duyệt qua danh sách để in ra tất cả các phần tử
 
-void setAt(Position P, ElementType x, List *L);// Thay đổi phần tử ở vị trí p bằng một giá trị mới x
+void setAt(Position P, ElementType x, List *L); // Thay đổi phần tử ở vị trí p bằng một giá trị mới x
 
-void InsertAt( Position P,ElementType X, List *L);// Thêm x vào vị trí p
+void InsertAt(Position P, ElementType X, List *L); // Thêm x vào vị trí p
 
-ElementType popAt(Position P, List *L);// Xóa và trả về phần tử ở vị trí p
+ElementType popAt(Position P, List *L); // Xóa và trả về phần tử ở vị trí p
 
-int insertFirst(ElementType x, List *L);//Thêm x vào vị trí đầu tiên
+int insertFirst(ElementType x, List *L); // Thêm x vào vị trí đầu tiên
 
-void popFirst(List *L);//Xóa và trả về phần tử đầu tiên
+void popFirst(List *L); // Xóa và trả về phần tử đầu tiên
 
 void append(ElementType x, List *L); // Thêm một phần tử mới vào cuối ds
 
-void popLast(List *L);//Xóa và trả về phần tử cuối cùng
+void popLast(List *L); // Xóa và trả về phần tử cuối cùng
 
-Position locate(ElementType x, List L);// Trả về vị trí xuất hiện đầu tiên của x trong danh sách
+Position locate(ElementType x, List L); // Trả về vị trí xuất hiện đầu tiên của x trong danh sách
 
-Position previous(Position p, List L);//Trả về vị trí trước đó của p trong danh sách
+Position previous(Position p, List L); // Trả về vị trí trước đó của p trong danh sách
 
-void swap(ElementType *x, ElementType *y);//thay đổi vị trí trong mảng
+void swap(ElementType x, ElementType y, List *L); // thay đổi vị trí trong mảng
 
 void sort(List *L);
-
 
 // KHỞI TẠO DANH SÁCH RỖNG
 void makeNull(List *L)
@@ -109,48 +108,52 @@ int getAt(Position P, List L)
 // Duyệt qua danh sách để in ra tất cả các phần tử
 void print(List L)
 {
-    if(empty(L)){
-        printf ("List is empty!!!!");
+    if (empty(L))
+    {
+        printf("List is empty!!!!");
     }
-    if(fullList(L)){
-        printf ("List is full!!!");
+    if (fullList(L))
+    {
+        printf("List is full!!!");
     }
     for (int i = first(L); i < end(L); i++)
     {
-        printf ("%d ", L.Elements[i-1]);
+        printf("%d ", L.Elements[i - 1]);
     }
 }
-
 
 // Thay đổi phần tử ở vị trí p bằng một giá trị mới x
 void setAt(Position P, ElementType x, List *L)
 {
-    if(P < 1 || P > Len(*L)){
+    if (P < 1 || P > Len(*L))
+    {
         printf("Error!!!\n");
         return;
     }
-    L->Elements[P-1] =x;
+    L->Elements[P - 1] = x;
 }
 
 // Thêm x vào vị trí p
-void InsertAt( Position P,ElementType X, List *L)
+void InsertAt(Position P, ElementType X, List *L)
 {
-    if (fullList(*L)){
+    if (fullList(*L))
+    {
         printf("List is full!!");
         return;
     }
-    else if ((P < 1) || (P > L->Last + 1)){
+    else if ((P < 1) || (P > L->Last + 1))
+    {
         printf("Error!!!");
         return;
     }
     else
-    {  
-        for (int i = L->Last ; i >= P; i--)//Dời các phtử từ vị trí p đến cuối dsách ra sau 1 vị trí
+    {
+        for (int i = L->Last; i >= P; i--) // Dời các phtử từ vị trí p đến cuối dsách ra sau 1 vị trí
         {
-            L->Elements[i] = L->Elements[i - 1];// Đưa x vào vị trí p    
+            L->Elements[i] = L->Elements[i - 1]; // Đưa x vào vị trí p
         }
         L->Elements[P - 1] = X;
-        L->Last++;// Tăng độ dài danh sách lên 1
+        L->Last++; // Tăng độ dài danh sách lên 1
     }
 }
 
@@ -173,24 +176,26 @@ int popAt(Position P, List *L)
     }
 }
 
-//Thêm x vào vị trí đầu tiên
+// Thêm x vào vị trí đầu tiên
 int insertFirst(ElementType x, List *L)
 {
-    if(fullList(*L)){
-        printf ("List is full!!");
+    if (fullList(*L))
+    {
+        printf("List is full!!");
     }
-    else{
-        InsertAt(first(*L),x, L);// Chèn phần tử x vào vị trí đầu tiên
-    } 
+    else
+    {
+        InsertAt(first(*L), x, L); // Chèn phần tử x vào vị trí đầu tiên
+    }
 }
 
-//Xóa và trả về phần tử đầu tiên
+// Xóa và trả về phần tử đầu tiên
 void popFirst(List *L)
 {
     popAt(first(*L), L);
 }
 
-//Thêm một phần tử mới vào cuối ds
+// Thêm một phần tử mới vào cuối ds
 void append(ElementType x, List *L)
 {
     if (fullList(*L)) // Kiểm tra danh sách có đầy không
@@ -202,71 +207,59 @@ void append(ElementType x, List *L)
     }
 }
 
-//Xóa và trả về phần tử cuối cùng
+// Xóa và trả về phần tử cuối cùng
 void popLast(List *L)
 {
     popAt(L->Last, L); // Xóa phần tử cuối cùng
 }
 
-//Trả về vị trí xuất hiện đầu tiên của x trong danh sách
+// Trả về vị trí xuất hiện đầu tiên của x trong danh sách
 Position Locate(ElementType X, List L)
 {
-    for(int i = 0; i <= L.Last-1; i++){
-        if(L.Elements[i] == X){
+    for (int i = 0; i <= L.Last - 1; i++)
+    {
+        if (L.Elements[i] == X)
+        {
             return i;
         }
     }
 }
 
-Position locate(ElementType x, List L){
-	Position p;
-	int found=0;
+Position locate(ElementType x, List L)
+{
+    Position p;
+    int found = 0;
     for (p = first(L); p < end(L) && !found; p++)
         if (L.Elements[p - 1] == x)
             found = 1;
     return p;
 }
 
-//Trả về vị trí trước đó của p trong danh sách
+// Trả về vị trí trước đó của p trong danh sách
 Position previous(Position p, List L)
 {
     return p - 1;
 }
-void swap(ElementType *x, ElementType *y)
+
+void swap(Position p, Position q, List *L)
 {
-    ElementType tmp = *x;
-    *x = *y;
-    *y = tmp;
+    ElementType temp;
+    temp = getAt(p, *L);
+    setAt(p, getAt(q, *L), L);
+    setAt(q, temp, L);
 }
 
-
-// selection sort
-
-// void sort(List *L) {
-//     for (Position p = first(*L); p < end(*L) - 1; p = next(p, *L)) {
-//         for (Position q = next(p, *L); q < end(*L); q = next(q, *L)) {
-//             if (getAt(p, *L) > getAt(q, *L)) {
-//                 ElementType temp = L->Elements[p - 1];
-//                 L->Elements[p - 1] = L->Elements[q - 1];
-//                 L->Elements[q - 1] = temp;
-//             }
-//         }
-//     }
-// }
-
 // bubbleSort
-void sort(List *L) {
-    Position i, j;
-    int n = end(*L);  // end(*L) trả về số phần tử trong danh sách
-
-    for (i = 0; i < n - 1; i++) {
-        // Vòng lặp thứ hai chạy từ đầu đến phần tử chưa được sắp xếp cuối cùng
-        for (j = 0; j < n - i - 1; j++) {
-            // So sánh hai phần tử liên tiếp và hoán đổi nếu thứ tự sai
-            if (L->Elements[j] > L->Elements[j + 1]) {
-                ElementType temp = L->Elements[j];
-                L->Elements[j] = L->Elements[j + 1];
-                L->Elements[j + 1] = temp;
+void bubbleSort(List *L)
+{
+    int size = Len(*L);
+    for (int i = first(*L); i < size; i++)
+    {
+        for (int j = first(*L); j <= size - i; j++)
+        {
+            if (getAt(j, *L) > getAt(j + 1, *L))
+            {
+                swap(j, j + 1, L);
             }
         }
     }

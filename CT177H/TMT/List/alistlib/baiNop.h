@@ -180,6 +180,7 @@ Position previous(Position p, List L) {
 }
 
 // Sắp xếp danh sách theo thứ tự tăng dần
+
 void sort(List *L) {
     for (Position p = first(*L); p < endList(*L) - 1; p = next(p, *L)) {
         for (Position q = next(p, *L); q < endList(*L); q = next(q, *L)) {
@@ -191,3 +192,23 @@ void sort(List *L) {
         }
     }
 }
+
+
+// void swap(ElementType *x, ElementType *y)
+// {
+//     ElementType tmp = *x;
+//     *x = *y;
+//     *y = tmp;
+// }
+
+
+
+// void sort(List *L) {
+//     for (Position p = first(*L); p < endList(*L) - 1; p = next(p, *L)) {
+//         for (Position q = next(p, *L); q < endList(*L); q = next(q, *L)) {
+//             if (getAt(p, *L) > getAt(q, *L)) {
+//                 swap(&p,&q);
+//             }
+//         }
+//     }
+// }

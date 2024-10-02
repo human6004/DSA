@@ -1,19 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// the maximum size of list
-#define MaxSize 100
-// the element type of list
 typedef int ElementType;
-// the position type of elements
-typedef int Position;
 
-typedef struct
+typedef struct Node
 {
-    ElementType Elements[MaxSize];// mảng bao gồm các phần tử của danh sách
-    Position top;// độ dài của danh sách
-} Stack;
+    ElementType data;
+    struct Node *Next;
+} Node;
 
+typedef Node *Stack;
 
 void makeNull(Stack *S); // Khởi tạo một ngăn xếp trống
 
@@ -42,63 +38,71 @@ int calC(int k, int n); // tổ hợp
 // if (k == 0 || k == n) return 1;
 // if (k == 1) return n;
 // return C(k - 1, n - 1) + C(k, n - 1);
-
 int main()
 {
-    int n = 8;
+    int n = 10;
     to_binary(n);
 
     printf("so  fibo thu %d la: %d\n", n, calFibo(n)); // In ra kết quả
 
     printf("top hop chap %d cua %d la: %d.\n", 3, 4, calC(3, 4));
+
     return 0;
 }
 
-void makeNull(Stack *S){
-    S->top =-1;
+void makeNull(Stack *S)
+{
+    Node *header = (Stack)malloc(sizeof(Node));
+    header->Next = NULL;
+    (*S) = header;
 }
 
-ElementType isEmpty(Stack S){
-    return S.top == -1;
+ElementType isEmpty(Stack S)
+{
+    return S->Next == NULL;
 }
 
-int isFull(Stack S){
-    return S.top == MaxSize-1;
+void push(ElementType x, Stack *S)
+{
+    Node *temp = (Stack)malloc(sizeof(Node));
+    temp->data = x;
+    temp->Next = (*S)->Next; // truyền phần tử vào đầu stack
+    (*S)->Next = temp;
 }
 
-void push(ElementType X, Stack *S){
-    if(isFull(*S)){
-        printf("Stack is full");
-        return;
-    }
-    else{
-        S->top++;
-        S->Elements[S->top] = X;
-    }
-}
+// ElementType pop(Stack *S){
+//     ElementType value = (*S)->Next->data;
+//     Stack del = (*S)->Next;
+//     (*S)->Next = del;
+//     free(del);
+//     return value;
+// }
 
+ElementType pop(Stack *S)
+{
+    if (isEmpty(*S))
+    {
+        printf("stack is empty\n");
+        return -1; // Nếu ngăn xếp rỗng, trả về -1
+    }
 
-ElementType pop(Stack *S ){
-    if(isEmpty(*S)){
-        printf("Stack is empty");
-        return -1;
-    }
-    else{
-        return S->Elements[S->top--];
-    }
+    Node *temp = (*S)->Next;
+    ElementType value = temp->data;
+    (*S)->Next = temp->Next;
+    free(temp);
+    return value;
 }
 
 // Hàm in toàn bộ danh sách (ngăn xếp)
-void printStack(Stack S) {
-    if (isEmpty(S)) {
-        printf("Stack is empty\n");
-    } else {
-        printf("stack: ");
-        for (int i = 0; i <= S.top; i++) {
-            printf("%d ", S.Elements[i]);
-        }
-        printf("\n");
+void print(Stack S)
+{
+    printf("Stack : ");
+    while (S->Next != NULL)
+    {
+        printf("%d ", S->Next->data);
+        S = S->Next;
     }
+    printf("\n");
 }
 
 // Hàm chuyển đổi số nguyên sang nhị phân và in nó ra

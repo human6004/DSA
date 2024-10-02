@@ -20,7 +20,13 @@
         "istream": "cpp",
         "streambuf": "cpp",
         "stack_list.h": "c",
-        "functional": "c"
+        "functional": "c",
+        "concepts": "c",
+        "memory": "c",
+        "optional": "c",
+        "ostream": "c",
+        "tuple": "c",
+        "utility": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
