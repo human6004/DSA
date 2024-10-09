@@ -1,0 +1,151 @@
+//################################################## USING EXTENDS ################################################
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
+ */
+package com.myctuer.demothreads;
+
+/**
+ *
+ * @author student
+ */
+public class DemoThreads extends Thread {
+
+    String name;
+
+    @Override
+    public void run() {
+        int count = 0;
+        
+        System.out.println("Run--------------------------");
+        while (count < 3) {
+            System.out.println("Active count " + Thread.activeCount());
+            name = Thread.currentThread().getName();
+            count++;
+            System.out.println(name);
+            if(name.equals("Threads1"))
+                System.out.println("aaa");
+            else
+                System.out.println("bbbb");
+        }
+    }
+}
+//################################################## USING INTERFACE ################################################
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.myctuer.demothreads;
+
+/**
+ *
+ * @author student
+ */
+public class ThreadsUsingInterface implements Runnable {
+ 
+    @Override
+    public void run() {
+        while (true) {
+            processSomething();
+        }
+    }
+ 
+    private void processSomething() {
+        try {
+            System.out.println("Processing working thread");
+            Thread.sleep(500);
+            System.out.println("Processing working thread again!!!!");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+ 
+    
+}
+
+
+
+//################################################## USING MAIN ################################################
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.myctuer.demothreads;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author student
+ */
+public class main {
+
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+        /*
+        extneds
+         */
+        //        DemoThreads demo = new DemoThreads();
+        //        demo.setName("Threads1");
+        //        
+        //        System.out.println("Main------------------------");
+        //        System.out.println("Threads: " +  Thread.currentThread().isAlive());
+        //        System.out.println("demo: " + demo.isAlive());
+        //        System.out.println(demo. isDaemon());
+        //        
+        //        demo.start();
+        //        //chạy xong xong 
+        //        System.out.println("Main------------------------");
+        //        System.out.println("Threads: " +  Thread.currentThread().isAlive());
+        //        System.out.println("demo: " + demo.isAlive());
+        //        System.out.println("Daenon: " + demo. isDaemon());
+
+        /*
+        interface
+         */
+        //NamedThread objNewThread= new NamedThread()
+        //Thread objThread = new Thread(objNewThread);
+//        Thread dt = new Thread(new ThreadsUsingInterface(), "My Non-Daemon Thread");
+        Thread dt = new Thread(new ThreadsUsingInterface(), "My Daemon Thread");
+        dt.setDaemon(true);
+        dt.start();
+
+        try {
+            // continue program
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(">><< Finishing main program");
+        /*
+        Như bạn thấy DaemonThread chạy song song với MainThread. Khi MainThread kết thúc thì tất cả DaemonThread cũng kết thúc.
+        */
+    }
+}
+//############################################### MULTI ####################################################################
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.myctuer.demothreads;
+
+/**
+ *
+ * @author student
+ */
+public class multiThreads {
+    public static void main(String[] args) {
+        DemoThreads demo = new DemoThreads();
+        Thread interThreads = new Thread(new ThreadsUsingInterface());
+        
+        demo.setName("demo");
+        interThreads.setName("interThreads");
+        interThreads.setDaemon(true);
+        
+        demo.start();
+        interThreads.start();
+        
+        System.out.println("Number of threads running :" + Thread.activeCount()); 
+    }
+}
