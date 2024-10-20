@@ -15,7 +15,7 @@ typedef struct {
 
 // Hàm khai báo
 void makeNull(List *L);
-int Len(List L);
+int len(List L);
 int empty(List L);
 int fullList(List L);
 Position first(List L);
@@ -40,7 +40,7 @@ void makeNull(List *L) {
 }
 
 // Trả về độ dài danh sách
-int Len(List L) {
+int len(List L) {
     return L.Last;
 }
 
@@ -92,7 +92,7 @@ void print(List L) {
 
 // Thay đổi phần tử ở vị trí P bằng một giá trị mới x
 void setAt(Position P, ElementType x, List *L) {
-    if (P < 1 || P > Len(*L)) {
+    if (P < 1 || P > len(*L)) {
         printf("Error: Invalid position!\n");
         return;
     }
