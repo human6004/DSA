@@ -1,0 +1,3 @@
+https://yellowcodebooks.com/2018/08/22/java-bai-42-thread-tap-2-cac-cach-thuc-de-tao-mot-thread/
+https://www.w3resource.com/java-exercises/multithreading/index.php
+https://www.tutorjoes.in/java_programming_tutorial/thread_exercise_programs_in_java
