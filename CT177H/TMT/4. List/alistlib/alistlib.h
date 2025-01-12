@@ -167,8 +167,8 @@ int popAt(Position P, List *L)
     else
     {
         int a = L->Elements[P - 1];
-        for (int i = first(*L) - 1; i < endList(*L); i++)
-        { // first(L)-1 = 0
+        for (int i = p - 1; i < endList(*L); i++)
+        { 
             L->Elements[i] = L->Elements[i + 1];
             L->Last--;
         }
@@ -225,17 +225,9 @@ Position Locate(ElementType X, List L)
     }
 }
 
-Position locate(ElementType x, List L)
-{
-    Position p;
-    int found = 0;
-    for (p = first(L); p < endList(L) && !found; p++)
-        if (L.Elements[p - 1] == x)
-            found = 1;
-    return p;
-}
 
 // Trả về vị trí trước đó của p trong danh sách
+//RETRIEVE(P,L)
 Position previous(Position p, List L)
 {
     return p - 1;

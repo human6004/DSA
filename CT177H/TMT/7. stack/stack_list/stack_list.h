@@ -21,23 +21,27 @@ int isEmpty(Stack S);// Kiểm tra xem một ngăn xếp có trống
 
 int isFull(Stack S);// Kiểm tra xem ngăn xếp đã đầy chưa?
 
-void push(ElementType x,Stack *S);// Đẩy x lên trên cùng
+void push(ElementType x,Stack *S);// Thêm phần tử X vào đỉnh ngăn xếp S / Đẩy x lên trên cùng
 
 ElementType pop(Stack *S);// Trả về phần tử ở trên cùng và loại bỏ nó
 
 
+// Khởi tạo một ngăn xếp trống
 void makeNull(Stack *S){
     S->top =-1;
 }
 
+// Kiểm tra xem một ngăn xếp có trống
 ElementType isEmpty(Stack S){
     return S.top == -1;
 }
 
+// Kiểm tra xem ngăn xếp đã đầy chưa?
 int isFull(Stack S){
     return S.top == MaxSize-1;
 }
 
+// Thêm phần tử X vào đỉnh ngăn xếp S
 void push(ElementType X, Stack *S){
     if(isFull(*S)){
         printf("Stack is full");
@@ -49,7 +53,7 @@ void push(ElementType X, Stack *S){
     }
 }
 
-
+// Trả về phần tử ở trên cùng và loại bỏ nó
 ElementType pop(Stack *S ){
     if(isEmpty(*S)){
         printf("Stack is empty");

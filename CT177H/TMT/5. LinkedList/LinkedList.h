@@ -20,8 +20,6 @@ int len(List L); // trả về đồ dài ds
 
 int empty(List L); // KIỂM TRA DANH SÁCH RỖNG
 
-int fullList(List L); // KIỂM TRA DANH SÁCH ĐẦY
-
 ElementType getAt(Position P, List L); // Trả về phần tử ở vị trí p
 
 void print(List L); // Duyệt qua danh sách để in ra tất cả các phần tử
@@ -42,14 +40,13 @@ void insertFirst(ElementType x, List *L); // Chèn x vào vị trí đầu tiên
 
 ElementType popFirst(List *L); // Xóa và trả về phần tử đầu tiên
 
-void  (ElementType x, List *L); // Thêm một phần tử mới vào danh sách
-
 ElementType popLast(List *L); // Xóa và trả về phần tử cuối cùng
 
 Position locate(ElementType x, List L); // Trả về vị trí xuất hiện đầu tiên của x trong danh sách
 
 PNode next(Position p, List L); // Trả về vị trí xuất hiện đầu tiên của x trong danh sách
 
+//RETRIEVE(P,L)
 PNode previous(Position p, List L); // Trả về con trỏ trỏ đến vị trí trước đó của p trong L
 
 /*
@@ -85,24 +82,7 @@ int empty(List L)
   return L->next == NULL; // Kiểm tra danh sách có rỗng không
 }
 
-/*
-Check whether the list is full?
-*/
-int fullList(List L)
-{ // bỏ trống
-}
 
-/*
-Traverse the list to print out all elements
-*/
-// void print(List L) {
-//     List header = L->next; // Bắt đầu từ phần tử đầu tiên
-//     while (header != NULL) {
-//         printf("%d ", header->data);
-//         header = header->next;
-//     }
-//     printf("\n");
-// }
 
 void print(List L)
 {
@@ -115,9 +95,7 @@ void print(List L)
   printf("\n");
 }
 
-/*
-Return the element at position p
-*/
+// Trả về phần tử ở vị trí p
 ElementType getAt(Position p, List L)
 {
   int n = len(L); // Khai báo và tính độ dài của danh sách
@@ -137,6 +115,7 @@ ElementType getAt(Position p, List L)
 
 /*
 Return the pointer referring to the ith element
+Trả về con trỏ trỏ đến phần tử thứ i
 */
 PNode getPosition(Position p, List L)
 {
@@ -155,18 +134,14 @@ PNode getPosition(Position p, List L)
   return newHead;
 }
 
-/*
-Return the pointer referring to the first element of L
-*/
+// trả về vị trí đầu tiên trong danh sách
 PNode first(List L)
 {
   List header = L;
   return header;
 }
 
-/*
-Return the pointer referring to the last element of L
-*/
+// trả về vị trí cuối danh sách
 PNode end(List L)
 {
   PNode P = L;
@@ -177,9 +152,7 @@ PNode end(List L)
   return P;
 }
 
-/*
-Update the element at position p by a new value
-*/
+// Thay đổi phần tử ở vị trí p bằng một giá trị mới x
 void setAt(Position p, ElementType x, List *L)
 {
   PNode posi = getPosition(p, *L);
@@ -189,9 +162,7 @@ void setAt(Position p, ElementType x, List *L)
   }
 }
 
-/*
-Insert x at position p
-*/
+// Thêm x vào vị trí p
 void insertAt(Position p, ElementType x, List *L)
 {
   List newNode = (Node *)malloc(sizeof(Node));
@@ -207,9 +178,9 @@ void insertAt(Position p, ElementType x, List *L)
     temp->next = newNode;
   }
 }
-/*
-Remove and return the element at position p
-*/
+
+
+// Xóa và trả về phần tử ở vị trí p
 ElementType popAt(Position p, List *L)
 {
   if (*L == NULL || p <= 0)
@@ -234,9 +205,7 @@ ElementType popAt(Position p, List *L)
   return data;
 }
 
-/*
-Insert x to the first position
-*/
+// Thêm x vào vị trí đầu tiên
 void insertFirst(ElementType x, List *L)
 {
   List newNode = (Node *)malloc(sizeof(Node));
@@ -245,9 +214,7 @@ void insertFirst(ElementType x, List *L)
   (*L)->next = newNode;       // cập nhật lại ds sau khi đã thêm node mới
 }
 
-/*
-Remove and return the first element
-*/
+// Xóa và trả về phần tử đầu tiên
 ElementType popFirst(List *L)
 {
   if (*L == NULL)
@@ -262,18 +229,14 @@ ElementType popFirst(List *L)
   return data;
 }
 
-/*
-Append a new element to the list
-*/
+// Thêm một phần tử mới vào cuối ds
 
 void append(ElementType x, List *L)
 {
   insertAt(len(*L), x, L);
 }
 
-/*
-Remove and return the last element
-*/
+// Xóa và trả về phần tử cuối cùng
 ElementType popLast(List *L)
 {
   ElementType value;
@@ -286,9 +249,7 @@ ElementType popLast(List *L)
   popAt(len(*L), L);
 }
 
-/*
-Return the position of the first appearance of x in the list
-*/
+// Trả về vị trí xuất hiện đầu tiên của x trong danh sách
 Position locate(ElementType x, List L)
 {
   List temp = L->next;
@@ -305,9 +266,7 @@ Position locate(ElementType x, List L)
   return -1;
 }
 
-/*
-Return the pointer referring to the next position of i in L
-*/
+// trả về vị trí kế tiếp
 PNode next(Position p, List L)
 {
   // Kiểm tra nếu vị trí p không hợp lệ
@@ -326,9 +285,7 @@ PNode next(Position p, List L)
   return NULL; // Trả về NULL nếu không có phần tử tiếp theo
 }
 
-/*
-Return the pointer referring to the previous position of p in L
-*/
+ // Trả về vị trí trước đó của p trong danh sách
 PNode previous(Position p, List L)
 {
   List temp = L;
@@ -340,35 +297,3 @@ PNode previous(Position p, List L)
 }
 
 
-// void bubbleSort(List *L) {
-//     if (*L == NULL || (*L)->next == NULL) {
-//         return; // Danh sách rỗng hoặc chỉ có một phần tử, không cần sắp xếp
-//     }
-    
-//     int swapped;
-//     PNode ptr1;
-//     PNode lptr = NULL; // Dùng để đánh dấu phần tử đã được sắp xếp
-
-//     do {
-//         swapped = 0;
-//         ptr1 = *L;
-
-//         while (ptr1->next != lptr) {
-//             if (ptr1->data > ptr1->next->data) {
-//                 // Hoán đổi dữ liệu giữa hai phần tử
-//                 ElementType temp = ptr1->data;
-//                 ptr1->data = ptr1->next->data;
-//                 ptr1->next->data = temp;
-                
-//                 swapped = 1; // Đánh dấu đã có sự hoán đổi
-//             }
-//             ptr1 = ptr1->next;
-//         }
-//         lptr = ptr1;
-//          /* Giảm bớt phạm vi của danh sách sau mỗi lần lặp,
-//           cập nhận next của lptr sau mỗi lần lặp là đia chỉ của phẩn tử đã đã được sắp xếp
-//           (để bỏ qua phần tử cuối đã đc sắp xếp-> tối ưu hiệu suất)
-//                             */
-
-//     } while (swapped);
-// }
